@@ -1,0 +1,10 @@
+metrics: {
+  "AWS/ELB": [
+    {metric_name: "RequestCount",period: 300, statistics: ['Sum']},
+    {metric_name: "HealthyHostCount", period: 300, statistics: ['Minimum']},
+    {metric_name: "HTTPCode_Backend_5XX",period: 300, statistics: ['Sum']}
+  ],
+  "AWS/EC2": [
+    {metric_name: "CPUUtilization",period: 300,statistics: ['Average'],dimensions: {"AutoScalingGroupName": "EndlineAppServerASGroup"}}],
+  "AWS/RDS": [{metric_name: "CPUUtilization",period: 300,statistics: ['Average']}]
+}

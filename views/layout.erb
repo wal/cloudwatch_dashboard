@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cloudwatch Dashboard</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+  <script src="/public/assets/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+
+  <link href="/public/assets/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" rel="stylesheet" >
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+      body {
+          min-height: 2000px;
+      }
+
+      .navbar-static-top {
+          margin-bottom: 19px;
+      }
+  </style>
+</head>
+<body>
+
+<!-- Static navbar -->
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Cloudwatch Dashboard</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <% @config['metrics'].each do |namespace, metrics| %>
+            <li class="<%= "active" if @namespace.eql?(namespace) %>"><a href="?namespace=<%= namespace %>"><%=  namespace %></a></li>
+        <% end  %>
+      </ul>
+    </div><!--/.nav-collapse -->
+    <ol class="breadcrumb right">
+      <li><%=  @start_time %></li>
+      <li><%=  @end_time %></li>
+      <li><%=  @region %></li>
+    </ol>
+  </div>
+</div>
+
+
+<div class="container">
+  <% @graphs.each_with_index do |graph, i| %>
+    <script type="text/javascript">
+      $(function () {
+          $('#jumbotron<%= i %>').highcharts({
+              title: {
+                  text: '<%= graph.graph_title %>',
+                  x: -20 //center
+              },
+              xAxis: {
+                  categories: <%= graph.x_axis_categories %>,
+                  labels: {
+                      rotation: -90,
+                      align: 'right',
+                      style: {
+                          fontSize: '9px'
+                      }
+                  }
+              },
+              yAxis: {
+                  title: {
+                      text: '<%= graph.y_axis_label %>'
+                  }
+              },
+              tooltip: {
+                  valueSuffix: '°C'
+              },
+              legend: {
+                  layout: 'vertical',
+                  align: 'right',
+                  verticalAlign: 'middle',
+                  borderWidth: 0
+              },
+              series: <%= graph.series.to_json %>
+          });
+      });
+
+
+    </script>
+  <% end  %>
+
+  <div id="jumbotron0"></div>
+  <hr />
+  <div id="jumbotron1"></div>
+  <hr />
+  <div id="jumbotron2"></div>
+
+
+</div> <!-- /container -->
+
+
+<script src="//code.highcharts.com/highcharts.js"></script>
+<script src="//code.highcharts.com/modules/exporting.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
