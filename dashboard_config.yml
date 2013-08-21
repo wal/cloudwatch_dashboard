@@ -1,10 +1,47 @@
 metrics: {
-  "AWS/ELB": [
-    {metric_name: "RequestCount",period: 300, statistics: ['Sum']},
-    {metric_name: "HealthyHostCount", period: 300, statistics: ['Minimum']},
-    {metric_name: "HTTPCode_Backend_5XX",period: 300, statistics: ['Sum']}
-  ],
   "AWS/EC2": [
-    {metric_name: "CPUUtilization",period: 300,statistics: ['Average'],dimensions: {"AutoScalingGroupName": "EndlineAppServerASGroup"}}],
-  "AWS/RDS": [{metric_name: "CPUUtilization",period: 300,statistics: ['Average']}]
+    {
+      title: "CPUUtilization",
+      period: 3600,
+      left: {
+        label: "CPU",
+        metrics: [{metric_name: "CPUUtilization",statistics: ['Average'],dimensions: {"AutoScalingGroupName": "EndlineAppServerASGroup"}}]
+      }
+    }
+  ],
+  "AWS/RDS": [
+    {
+          title: "RDS - CPUUtilization",
+          period: 3600,
+          left: {
+            label: "CPU",
+            metrics: [{metric_name: "CPUUtilization",statistics: ['Average'],dimensions: {"DBInstanceIdentifier": "endline-prod"}}]
+          }
+        }
+  ],
+  "AWS/ELB": [
+    { title: "ELB - Requests/Latency",
+      period: 3600,
+      left: {
+        label: "Latency",
+        metrics: [{metric_name: "Latency", statistics: ['Average']}]
+      },
+      right: {
+        label: "Requests",
+        metrics: [{metric_name: "RequestCount",statistics: ['Sum']}]
+      }
+    },
+    { title: "ELB - Response Codes",
+          period: 300,
+          left: {
+            label: "Count",
+            metrics: [
+              {metric_name: "HTTPCode_Backend_2XX",statistics: ['Sum']},
+              {metric_name: "HTTPCode_Backend_3XX", statistics: ['Sum']},
+              {metric_name: "HTTPCode_Backend_4XX", statistics: ['Sum']},
+              {metric_name: "HTTPCode_Backend_5XX", statistics: ['Sum']}
+          ]
+          }
+        }
+  ]
 }

@@ -1,0 +1,12 @@
+<div class="container">
+  <% @graphs.each_with_index do |graph, i| %>
+      <script type="text/javascript">
+          $(function () {
+              $('#Graph<%= i %>').highcharts(<%= graph.graph_data %>);
+          });
+      </script>
+      <div id='Graph<%= i %>'></div>
+  <% end  %>
+
+</div>
+<!-- /container -->
