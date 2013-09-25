@@ -15,6 +15,8 @@ Metrics are divided up by namespace, and each namespace graphs are rendered on d
 ### Single Metric
 To render a graph of the aggregated average CPUUtilization across your EC2 instances
 
+![Cloudwatch Dashboard](/docs/single_metric.png)
+
 <pre><code>
 metrics: {
   "AWS/EC2": [
@@ -34,10 +36,11 @@ metrics: {
 
 You can graph multiple metrics on the same graph.
 
-
 #### Multiple metrics same side
 
 To graph of your ELB response codes together on the same graph
+
+![Cloudwatch Dashboard](/docs/multiple_metrics_same_side.png)
 
 <pre><code>
 metrics: {
@@ -62,6 +65,8 @@ metrics: {
 #### Multiple metrics different sides
 
 To draw a graph of ELB Latency (on the left) and ELB Request Count (on the right)
+
+![Cloudwatch Dashboard](/docs/multiple_metrics_diff_sides.png)
 
 <pre><code>
 metrics: {
