@@ -2,7 +2,6 @@
 
 A simple dashboard for rendering graphs of AWS Cloudwatch metrics.
 
-
 ![Cloudwatch Dashboard](/docs/multiple_metrics.png)
 
 
@@ -126,11 +125,31 @@ This implementation has some limitations for my use-case, but feel free to send 
 
 
 ## Run
+1. Configure some metrics in <pre>dashboard_config.yml</pre>
+
+2. Configure environment variables for access/secret key. They are configured as ENV variables to make deployment to heroku simple
+
+<pre><code>
 $ bundle install
 $ export AWS_ACCESS_KEY_ID=you-aws-access-key
 $ export AWS_SECRET_KEY_ID=your-aws-secret-key
+</pre></code>
+
+3. Run sinatra server
+<pre><code>
+$ ruby dashboard.rb
+</code></pre>
+
+4. Open web browser to (http://localhost:4567)
+
+## Deploy
+You can easily deploy to Heroku using the usual steps and set the AWS_ACCCESS_KEY and AWS_SECRET_KEY environment variables.
+
 
 ## Technologies used
 * Highcharts
 * Sinatra
 * Twitter Bootstrap
+
+## Links
+* [AWS Cloudwatch](http://aws.amazon.com/documentation/cloudwatch/)
