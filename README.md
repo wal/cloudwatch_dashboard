@@ -3,6 +3,9 @@
 A simple dashboard for rendering graphs of AWS Cloudwatch metrics.
 
 
+![Cloudwatch Dashboard](/docs/multiple_metrics.png)
+
+
 ## Configuration
 
 The metrics to graph are configured in the dashboard_config.yml file.
