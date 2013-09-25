@@ -90,6 +90,8 @@ metrics: {
 
 You can add multiple (per namespace) graphs on the same page
 
+![Cloudwatch Dashboard](/docs/multiple_metrics.png)
+
  <pre><code>
     metrics: {
         "AWS/ELB": [
